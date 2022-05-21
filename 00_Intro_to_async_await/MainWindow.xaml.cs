@@ -29,10 +29,11 @@ namespace _00_Intro_to_async_await
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            await MakeProgressAsync();
-            listBox.Items.Add(await GenerateValueAsync()); // freez
-            
+            await MakeProgressAsync(); // async
+            //t.Wait(); // freeze
+
             progressBar.Value++;
+            listBox.Items.Add(await GenerateValueAsync()); // freeze
         }
 
         private Task MakeProgressAsync()
