@@ -33,7 +33,7 @@ namespace _00_Intro_to_async_await
             //t.Wait(); // freeze
 
             progressBar.Value++;
-            listBox.Items.Add(await GenerateValueAsync()); // freeze
+            listBox.Items.Add(await GenerateValueAsync()); // async
         }
 
         private Task MakeProgressAsync()
