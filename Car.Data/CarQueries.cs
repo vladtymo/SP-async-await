@@ -11,22 +11,22 @@ namespace Car.Data
     {
         private CarDbContext ctx = new CarDbContext();
         private Random rand = new Random();
-        public Task<IEnumerable<Car>> GetAllCars()
+        public Task<List<Car>> GetAllCars()
         {
             return Task.Run(() =>
             {
-                return (IEnumerable<Car>)ctx.Cars.ToList();
+                return ctx.Cars.ToList();
             });
         }
-        public async Task<IEnumerable<Car>> GetFilteredCars()
+        public Task<List<Car>> GetFilteredCars()
         {
             IQueryable<Car> query = ctx.Cars.Where(c => c.Make.StartsWith("A")).OrderBy(c => c.ModelYear);
-            return await query.ToListAsync();
+            return query.ToListAsync();
         }
 
-        public async Task<Car> GetRandomCar()
+        public Car GetRandomCar()
         {
-            var cars = await ctx.Cars.ToListAsync();
+            var cars = ctx.Cars.ToList();
             return cars[rand.Next(cars.Count)];
         }
         public async Task CreateRandomData(int count)
@@ -35,7 +35,7 @@ namespace Car.Data
 
             for (int i = 0; i < count; i++)
             {
-                cars.Add(await GetRandomCar());
+                cars.Add(GetRandomCar());
             }
             ctx.Cars.AddRange(cars);
 

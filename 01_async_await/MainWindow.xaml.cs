@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -32,11 +33,11 @@ namespace _01_async_await
             // types: double = Task<double>
 
             //double result = HardWork();             // freeze
-            //double result = HardWorkAsync().Result; // freeze
+            //double result = HardWorkAsync().Result;  // freeze
 
             // ------ await - can wait for the task asynchronouslly
-            double result = await HardWorkAsync();
-
+            double result = await HardWorkAsync(); // asynchonous waiting for 2s>
+         
             listBox.Items.Add(result);
         }
 
