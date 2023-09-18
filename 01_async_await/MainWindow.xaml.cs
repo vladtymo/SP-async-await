@@ -36,11 +36,19 @@ namespace _01_async_await
             //double result = HardWorkAsync().Result;  // freeze
 
             // ------ await - can wait for the task asynchronouslly
-            double result = await HardWorkAsync(); // asynchonous waiting for 2s>
-         
+            double result = await HardWorkAsync();
+            
             listBox.Items.Add(result);
         }
 
+        private double HardWork()
+        {
+            var number = new Random().Next(100);
+            Thread.Sleep(2000);
+            var result = Math.Pow(number, number);
+            //MessageBox.Show($"Result: {result}");
+            return result;
+        }
         private Task<double> HardWorkAsync()
         {
             return Task.Run(() =>
@@ -51,14 +59,6 @@ namespace _01_async_await
                 //MessageBox.Show($"Result: {result}");
                 return result;
             });
-        }
-        private double HardWork()
-        {
-            var number = new Random().Next(100);
-            Thread.Sleep(2000);
-            var result = Math.Pow(number, number);
-            //MessageBox.Show($"Result: {result}");
-            return result;
         }
     }
 }

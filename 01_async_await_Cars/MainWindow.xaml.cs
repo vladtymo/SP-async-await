@@ -31,15 +31,6 @@ namespace _01_async_await_Cars
             InitializeComponent();
         }
 
-        private Task<int> HardWork()
-        {
-            return Task.Run(() =>
-            {
-                // a lot of work
-                Thread.Sleep(5000);
-                return 100;
-            });
-        }
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             grid.ItemsSource = await queries.GetAllCars();

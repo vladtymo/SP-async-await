@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,11 +12,11 @@ namespace Car.Data
     {
         private CarDbContext ctx = new CarDbContext();
         private Random rand = new Random();
-        public Task<List<Car>> GetAllCars()
+        public async Task<List<Car>> GetAllCars()
         {
-            return Task.Run(() =>
+            return await Task.Run(() =>
             {
-                return ctx.Cars.ToList();
+                return ctx.Cars.ToListAsync();
             });
         }
         public Task<List<Car>> GetFilteredCars()
@@ -28,6 +29,7 @@ namespace Car.Data
         {
             var cars = ctx.Cars.ToList();
             return cars[rand.Next(cars.Count)];
+
         }
         public async Task CreateRandomData(int count)
         {
@@ -35,7 +37,8 @@ namespace Car.Data
 
             for (int i = 0; i < count; i++)
             {
-                cars.Add(GetRandomCar());
+                //cars.Add(GetRandomCar());
+                ctx.Cars.Add(GetRandomCar());
             }
             ctx.Cars.AddRange(cars);
 
